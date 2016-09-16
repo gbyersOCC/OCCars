@@ -1,14 +1,19 @@
 package edu.orangecoastcollege.cs273.gbyers.occars;
 
 /**
- * Created by grant on 9/14/2016.
+ * @author Grant Byers
+ * 9/14/2016
  */
 public class Car {
-    private static final double TAXRATE = 0.01;
-    private int mDownPayment;
+    private static final double TAX_RATE = 0.08;
+    private static final double THREE_RATE = .0462;
+    private static final double FOUR_RATE = .0416;
+    private static final double FIVE_RATE = .0419;
+    private double mDownPayment;
     private int mLoanTerm;
-    private int mPrice;
-    double interest;
+    private double mPrice;
+    private double interest;
+
     public Car()
     {
         mDownPayment = 0;
@@ -17,11 +22,11 @@ public class Car {
     }
 
 
-    public int getDownPayment() {
+    public double getDownPayment() {
         return mDownPayment;
     }
 
-    public void setDownPayment(int downPayment) {
+    public void setDownPayment(double downPayment) {
         mDownPayment = downPayment;
     }
 
@@ -34,39 +39,51 @@ public class Car {
         mLoanTerm = loanTerm;
     }
 
-    public int getPrice() {
+    public double getPrice() {
         return mPrice;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(double price) {
         mPrice = price;
     }
 
-    public void calculateBorrowedAmount()
+    public double calculateBorrowedAmount()
     {
 //is borrowed amount (loan amount minus down payment)
-        // mPrice = mPrice - mDownPayment;
-
+       return (mPrice-mDownPayment)+(mPrice*TAX_RATE);
 
     }
-    public void calculateInterestAmount()
+    public double calculateInterestAmount()
     {
-//I = P*R*T
-        interest = mPrice* (.0308)*mLoanTerm;
+        if(mLoanTerm == 3)
+            interest= THREE_RATE;
+        else if(mLoanTerm==4)
+            interest=FOUR_RATE;
+        else if(mLoanTerm == 5)
+            interest=FIVE_RATE;
+        else
+            interest=0;
+
+        double borrowed = (mPrice-mDownPayment)+(mPrice*TAX_RATE);
+        return borrowed * interest;
 
     }
-    public void calculateMonthlyPayment()
+    public double calculateMonthlyPayment()
     {
         int months = mLoanTerm*12;
 
-double monthlyAmount = (mPrice*(3.08/1200)*(1+3.08/1200))/((1+3.08/1200)-1);
-    }
-    public void calculateTaxAmount()
-    {
-        mPrice*=TAXRATE;
-    }
-    public void calculateTotalCost()
-    {
+        return calculateInterestAmount()+calculateBorrowedAmount()/months;
 
+
+    }
+    public double calculateTaxAmount()
+    {
+       return mPrice*TAX_RATE;
+
+    }
+    public double calculateTotalCost()
+    {
+        double total= (mPrice-mDownPayment)+(mPrice*TAX_RATE);
+        return total;
     }
 }

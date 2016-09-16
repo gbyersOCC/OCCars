@@ -20,7 +20,7 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:src="@drawable/oc_cars_logo"
-        android:contentDescription="Orange Lamborghini"/>
+        />
 
     <TextView
         android:layout_width="match_parent"
@@ -32,7 +32,7 @@
         android:gravity="center"
         android:textSize="15sp"
         android:textColor="@color/bone_white"
-        android:foreground="@color/steel_blue"/>
+        android:background="@color/steel_blue" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -149,5 +149,5 @@
         android:text="@string/loan_report_button_text"
         android:id="@+id/loanReportButton"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"/>
+        android:layout_centerHorizontal="true" />
 </RelativeLayout>
